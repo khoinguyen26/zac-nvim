@@ -83,7 +83,25 @@ return {
                         end,
                         root_dir = lspconfig.util.root_pattern('*.sln', '*.csproj'),
                     }
-                end
+                end,
+                ["gopls"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.gopls.setup {
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            if client.server_capabilities.documentFormattingProvider then
+                                -- Format on save
+                                vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })]]
+                            end
+
+                            -- Add key mappings for Go
+                            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                        end,
+                    }
+                end,
             }
         })
 

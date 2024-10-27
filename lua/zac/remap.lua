@@ -42,7 +42,7 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- search and replace
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- make file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })              -- make file executable
 
 vim.keymap.set(
     "n",
@@ -55,3 +55,17 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-- Enable bracket completion
+vim.o.completeopt = "menuone,noselect"
+
+-- Automatically close brackets and quotes
+vim.api.nvim_exec([[
+  inoremap ( ()<Left>
+  inoremap { {}<Left>
+  inoremap [ []<Left>
+  inoremap ' ''<Left>
+  inoremap " ""<Left>
+]], false)
+
+
