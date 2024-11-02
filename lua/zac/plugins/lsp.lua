@@ -122,7 +122,30 @@ return {
             sources = {
                 { name = 'nvim_lsp' },
                 { name = 'buffer' },
-            }
+                { name = 'luasnip' }
+            },
+            enabled = function()
+                local context = require('cmp.config.context')
+                return not context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
+            end
+        })
+
+
+        -- LuaSnip: Add XML Documentation Snippet for C#
+        local ls = require 'luasnip'
+        ls.config.set_config { history = true }
+
+        ls.add_snippets("cs", {
+            ls.snippet("///", {
+                ls.text_node("/// <summary>"),
+                ls.insert_node(1, "Description here"),
+                ls.text_node({ "</summary>", "/// <param name=\"" }),
+                ls.insert_node(2, "param"),
+                ls.text_node("\">"),
+                ls.insert_node(3, "Parameter description"),
+                ls.text_node("</param>"),
+                ls.insert_node(0),
+            })
         })
 
         vim.diagnostic.config({
