@@ -124,10 +124,6 @@ return {
                 { name = 'buffer' },
                 { name = 'luasnip' }
             },
-            enabled = function()
-                local context = require('cmp.config.context')
-                return not context.in_treesitter_capture("comment") or context.in_syntax_group("Comment")
-            end
         })
 
 

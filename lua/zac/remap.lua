@@ -56,16 +56,4 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
--- Enable bracket completion
-vim.o.completeopt = "menuone,noselect"
-
--- Automatically close brackets and quotes
-vim.api.nvim_exec([[
-  inoremap ( ()<Left>
-  inoremap { {}<Left>
-  inoremap [ []<Left>
-  inoremap ' ''<Left>
-  inoremap " ""<Left>
-]], false)
-
 
