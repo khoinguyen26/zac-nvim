@@ -29,7 +29,8 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
-                "csharp_ls"
+                "csharp_ls",
+                "pyright"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -95,6 +96,56 @@ return {
                             end
 
                             -- Add key mappings for Go
+                            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                        end,
+                    }
+                end,
+                ["rust_analyzer"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.rust_analyzer.setup {
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            -- Format on save if supported
+                            if client.server_capabilities.documentFormattingProvider then
+                                vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })]]
+                            end
+
+                            -- Custom key mappings for Rust
+                            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                        end,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                assist = {
+                                    importGranularity = "module",
+                                    importPrefix = "by_self",
+                                },
+                                cargo = {
+                                    loadOutDirsFromCheck = true,
+                                },
+                                procMacro = {
+                                    enable = true,
+                                },
+                            },
+                        },
+                    }
+                end,
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pyright.setup {
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            if client.server_capabilities.documentFormattingProvider then
+                                -- Format on save
+                                vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })]]
+                            end
+
+                            -- Add key mappings for Python
                             vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { buffer = bufnr })
                             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
                             vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr })
