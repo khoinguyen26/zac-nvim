@@ -7,6 +7,7 @@ vim.opt.softtabstop = 4  -- Number of spaces that a <Tab> counts for when editin
 vim.opt.shiftwidth = 4   -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Convert tabs to spaces
 
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.smartindent = true
 
@@ -30,5 +31,4 @@ vim.opt.isfname:append("@-@")                          -- Include '@' and '-' in
 vim.opt.updatetime = 50                                -- Time in milliseconds for triggering events (like CursorHold)
 
 vim.opt.colorcolumn = "80"                             -- Highlight column 80 (typically for line length limits)
-
 
