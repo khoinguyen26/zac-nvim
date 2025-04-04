@@ -58,6 +58,12 @@ return {
                     local lspconfig = require("lspconfig")
                     lspconfig.lua_ls.setup {
                         capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            if client.server_capabilities.documentFormattingProvider then
+                                -- Format on save
+                                vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = true })]]
+                            end
+                        end,
                         settings = {
                             Lua = {
                                 runtime = { version = "Lua 5.1" },
@@ -118,6 +124,7 @@ return {
                             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })
                             vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr })
                             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
+                            vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
                         end,
                         settings = {
                             ["rust-analyzer"] = {
@@ -131,6 +138,8 @@ return {
                                 procMacro = {
                                     enable = true,
                                 },
+                                enable_inlay_hints = true,
+                                enable_snippets = true
                             },
                         },
                     }
@@ -153,7 +162,8 @@ return {
                         end,
                     }
                 end,
-            }
+            },
+            automatic_installation = true
         })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
