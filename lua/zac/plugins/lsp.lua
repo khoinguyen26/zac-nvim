@@ -87,6 +87,8 @@ return {
                             vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, { buffer = bufnr })     -- Show references
                             vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { buffer = bufnr }) -- Go to implementation
                             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })         -- Rename
+                            vim.keymap.set("n", "<C-space>", vim.lsp.buf.hover, { buffer = bufnr })
+                            vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { buffer = bufnr })
                         end,
                         root_dir = lspconfig.util.root_pattern('*.sln', '*.csproj'),
                     }
