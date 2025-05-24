@@ -22,7 +22,7 @@ vim.opt.undofile = true                                -- Enable persistent undo
 vim.opt.hlsearch = false                               -- Disable highlighting of search matches
 vim.opt.incsearch = true                               -- Enable incremental search
 
-vim.opt.termguicolors = true                           -- Enable 24-bit RGB color in the terminal
+vim.opt.termguicolors = true                          -- Enable 24-bit RGB color in the terminal
 
 vim.opt.scrolloff = 8                                  -- Keep 8 lines visible above and below the cursor
 vim.opt.signcolumn = "yes"                             -- Always show the sign column (for diagnostics, etc.)
