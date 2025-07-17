@@ -15,9 +15,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-require("lazy").setup({
-    spec = "zac.plugins",
-  -- Configure any other settings here. See the documentation for more details.
-  -- automatically check for plugin updates
-  checker = { enabled = true },
-})
+
