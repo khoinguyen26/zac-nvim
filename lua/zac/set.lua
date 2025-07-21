@@ -16,7 +16,11 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false                               -- Disable swap files
 vim.opt.backup = false                                 -- Disable backup files
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set the directory for undo files
+
+-- make it cross-platform
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+
+vim.opt.undodir = home .. "/.vim/undodir" -- Set the directory for undo files
 vim.opt.undofile = true                                -- Enable persistent undo
 
 vim.opt.hlsearch = false                               -- Disable highlighting of search matches
