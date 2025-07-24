@@ -11,5 +11,8 @@ return {
 		map("n", "K", vim.lsp.buf.hover, opts)
 		map("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+		map("i", "<C-l>", function()
+			require("blink.cmp").show()
+		end, { desc = "Trigger Blink completion menu" })
 	end,
 }
