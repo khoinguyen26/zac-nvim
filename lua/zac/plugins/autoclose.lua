@@ -1,8 +1,8 @@
 return {
-    {
-        'm4xshen/autoclose.nvim',
-        opts = {
-
-        }
-    }
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		opts = {},
+	},
 }
