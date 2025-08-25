@@ -15,7 +15,6 @@
 -- }
 
 vim.lsp.config("lua_ls", {
-	single_file_support = true,
 	on_init = function(client)
 		if client.workspace_folders then
 			local path = client.workspace_folders[1].name
@@ -49,21 +48,11 @@ vim.lsp.config("lua_ls", {
 					-- '${3rd}/luv/library'
 					-- '${3rd}/busted/library'
 				},
-				-- Ignore directories to prevent scanning the entire user folder
-				ignoreDir = {
-					".git/",
-					"node_modules/",
-					"C:/Users/Khoi.Nguyen/AppData/",
-					"C:/Users/Khoi.Nguyen/.cargo/",
-					"C:/Users/Khoi.Nguyen/.rustup/",
-					-- add any other large or irrelevant directories here
-				},
 				-- Or pull in all of 'runtimepath'.
 				-- NOTE: this is a lot slower and will cause issues when working on
 				-- your own configuration.
 				-- See https://github.com/neovim/nvim-lspconfig/issues/3189
-				-- library = {
-				--   vim.api.nvim_get_runtime_file('', true),
+				-- library = {         --   vim.api.nvim_get_runtime_file('', true),
 				-- }
 			},
 		})
