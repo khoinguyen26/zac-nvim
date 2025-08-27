@@ -9,6 +9,7 @@ end
 local my_os = get_os()
 
 return {
+	-- themes
 	{
 		"rose-pine/neovim",
 		lazy = false,
@@ -44,5 +45,18 @@ return {
 			vim.cmd("let g:everforest_background = 'hard'")
 			vim.cmd.colorscheme("everforest")
 		end,
+	},
+	-- status line
+	{
+		"windwp/windline.nvim",
+		config = function()
+			require("wlsample.airline")
+		end,
+
+		-- 'nvim-lualine/lualine.nvim',
+		-- dependencies = { 'nvim-tree/nvim-web-devicons' },
+		-- opts = {
+		--     theme = "auto"
+		-- }
 	},
 }
