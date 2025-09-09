@@ -48,15 +48,21 @@ return {
 	},
 	-- status line
 	{
-		"windwp/windline.nvim",
-		config = function()
-			require("wlsample.airline")
-		end,
+		-- "windwp/windline.nvim",
+		-- config = function()
+		-- 	require("wlsample.airline")
+		-- end,
 
-		-- 'nvim-lualine/lualine.nvim',
-		-- dependencies = { 'nvim-tree/nvim-web-devicons' },
-		-- opts = {
-		--     theme = "auto"
-		-- }
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").setup({
+				options = {
+					section_separators = { left = "", right = "" },
+					component_separators = { left = "", right = "" },
+					theme = "palenight",
+				},
+			})
+		end,
 	},
 }
