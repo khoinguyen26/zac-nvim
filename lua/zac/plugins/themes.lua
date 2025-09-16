@@ -1,68 +1,89 @@
-local function get_os()
-	if package.config:sub(1, 1) == "\\" then
-		return "Windows"
-	else
-		return "Linux"
-	end
-end
+local theme_configs = {
+    ["tokyonight"] = {
+        statusline = "windline",
+        config = function()
+            vim.cmd([[colorscheme tokyonight-night]])
+        end
+    },
+    ["everforest"] = {
+        statusline = "lualine",
+        lualine_theme = "everforest",
+        config = function()
+            vim.g.everforest_enable_italic = true
+            vim.cmd("let g:everforest_background = 'hard'")
+            vim.cmd.colorscheme("everforest")
+        end
+    },
+    ["rose-pine"] = {
+        statusline = "lualine",
+        lualine_theme = "rose-pine",
+        config = function()
+            vim.cmd([[colorscheme rose-pine]])
+        end
+    },
+    ["monokai-pro"] = {
+        statusline = "lualine",
+        lualine_theme = "gruvbox_dark",
+        config = function()
+            require("monokai-pro").setup()
+            vim.cmd.colorscheme("monokai-pro")
+        end
+    }
+}
 
-local my_os = get_os()
+local current_theme = "everforest"
+
 
 return {
-	-- themes
-	{
-		"rose-pine/neovim",
-		lazy = false,
-		name = "rose-pine",
-		-- enabled = (my_os == "Linux"),
-		enabled = false,
-		priority = 1000,
-		config = function()
-			-- load the colorscheme here
-			vim.cmd([[colorscheme rose-pine]])
-		end,
-	},
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-		enabled = false,
-		config = function()
-			-- load the colorscheme here
-			vim.cmd([[colorscheme tokyonight-night]])
-		end,
-	},
-	{
-		"sainnhe/everforest",
-		lazy = false,
-		priority = 1000,
-		enabled = true,
-		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
-			vim.g.everforest_enable_italic = true
-			vim.cmd("let g:everforest_background = 'hard'")
-			vim.cmd.colorscheme("everforest")
-		end,
-	},
-	-- status line
-	{
-		-- "windwp/windline.nvim",
-		-- config = function()
-		-- 	require("wlsample.airline")
-		-- end,
-
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function()
-			require("lualine").setup({
-				options = {
-					section_separators = "",
-					component_separators = { left = "│", right = "│" },
-					theme = "everforest",
-				},
-			})
-		end,
-	},
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = (current_theme == "tokyonight"),
+        config = theme_configs["tokyonight"].config,
+    },
+    {
+        "sainnhe/everforest",
+        lazy = false,
+        priority = 1000,
+        enabled = (current_theme == "everforest"),
+        config = theme_configs["everforest"].config,
+    },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        lazy = false,
+        priority = 1000,
+        enabled = (current_theme == "rose-pine"),
+        config = theme_configs["rose-pine"].config,
+    },
+    {
+        "loctvl842/monokai-pro.nvim",
+        lazy = fasle,
+        priority = 1000,
+        enabled = (current_theme == "monokai-pro"),
+        config = theme_configs["monokai-pro"].config
+    },
+    {
+        "windwp/windline.nvim",
+        enabled = (theme_configs[current_theme].statusline == "windline"),
+        config = function()
+            require("wlsample.airline")
+        end,
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        enabled = (theme_configs[current_theme].statusline == "lualine"),
+        config = function()
+            local theme_name = theme_configs[current_theme].lualine_theme or "auto"
+            require("lualine").setup({
+                options = {
+                    section_separators = "",
+                    component_separators = { left = "│", right = "│" },
+                    theme = theme_name,
+                },
+            })
+        end,
+    },
 }

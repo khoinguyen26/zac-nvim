@@ -64,3 +64,8 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
+
+vim.keymap.set("n", "<leader>tt", ":Theme ", { desc = "Switch theme" })
+vim.keymap.set("n", "<leader>te", ":Theme everforest<CR>", { desc = "Switch to everforest" })
+vim.keymap.set("n", "<leader>tn", ":Theme tokyonight<CR>", { desc = "Switch to tokyonight" })
+vim.keymap.set("n", "<leader>tr", ":Theme rose-pine<CR>", { desc = "Switch to rose-pine" })
