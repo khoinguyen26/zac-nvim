@@ -32,5 +32,3 @@ vim.opt.signcolumn = "yes" -- Always show the sign column (for diagnostics, etc.
 vim.opt.isfname:append("@-@") -- Include '@' and '-' in filenames
 
 vim.opt.updatetime = 50 -- Time in milliseconds for triggering events (like CursorHold)
-
--- vim.opt.colorcolumn = "80"                -- Highlight column 80 (typically for line length limits)

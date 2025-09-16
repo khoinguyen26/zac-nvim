@@ -27,7 +27,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {},
-		enabled = true,
+		enabled = false,
 		config = function()
 			-- load the colorscheme here
 			vim.cmd([[colorscheme tokyonight-night]])
@@ -37,7 +37,7 @@ return {
 		"sainnhe/everforest",
 		lazy = false,
 		priority = 1000,
-		enabled = false,
+		enabled = true,
 		config = function()
 			-- Optionally configure and load the colorscheme
 			-- directly inside the plugin declaration.
@@ -58,9 +58,9 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = {
-					section_separators = { left = "", right = "" },
-					component_separators = { left = "", right = "" },
-					theme = "palenight",
+					section_separators = "",
+					component_separators = { left = "│", right = "│" },
+					theme = "everforest",
 				},
 			})
 		end,
