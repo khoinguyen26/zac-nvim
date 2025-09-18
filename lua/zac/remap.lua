@@ -69,3 +69,9 @@ vim.keymap.set("n", "<leader>tt", ":Theme ", { desc = "Switch theme" })
 vim.keymap.set("n", "<leader>te", ":Theme everforest<CR>", { desc = "Switch to everforest" })
 vim.keymap.set("n", "<leader>tn", ":Theme tokyonight<CR>", { desc = "Switch to tokyonight" })
 vim.keymap.set("n", "<leader>tr", ":Theme rose-pine<CR>", { desc = "Switch to rose-pine" })
+
+-- Paste below on a new line
+vim.keymap.set("n", "<leader>p", "o<Esc>p", { desc = "Paste below on new line" })
+
+-- Paste above on a new line
+vim.keymap.set("n", "<leader>P", "O<Esc>p", { desc = "Paste above on new line" })
