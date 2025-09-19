@@ -11,6 +11,14 @@ return {
 			json = { "prettier" },
 			markdown = { "prettier" },
 		},
+		formatters = {
+			prettier = {
+				prepend_args = { "--trailing-comma", "es5" },
+			},
+			prettierd = {
+				prepend_args = { "--trailing-comma", "es5" },
+			},
+		},
 		-- Set up format on save
 		format_on_save = {
 			timeout_ms = 500,
