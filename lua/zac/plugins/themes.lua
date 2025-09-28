@@ -21,12 +21,11 @@ local theme_configs = {
 			vim.cmd([[colorscheme rose-pine]])
 		end,
 	},
-	["monokai-pro"] = {
+	["nord"] = {
 		statusline = "lualine",
-		lualine_theme = "gruvbox_dark",
+		lualine_theme = "auto",
 		config = function()
-			require("monokai-pro").setup()
-			vim.cmd.colorscheme("monokai-pro")
+			vim.cmd.colorscheme("nord")
 		end,
 	},
 }
@@ -58,11 +57,11 @@ return {
 		config = theme_configs["rose-pine"].config,
 	},
 	{
-		"loctvl842/monokai-pro.nvim",
+		"arcticicestudio/nord-vim",
 		lazy = fasle,
 		priority = 1000,
-		enabled = (current_theme == "monokai-pro"),
-		config = theme_configs["monokai-pro"].config,
+		enabled = (current_theme == "nord"),
+		config = theme_configs["nord"].config,
 	},
 	-- statusline
 	{
