@@ -23,14 +23,19 @@ local theme_configs = {
 	},
 	["nord"] = {
 		statusline = "lualine",
-		lualine_theme = "auto",
+		lualine_theme = "nord",
 		config = function()
 			vim.cmd.colorscheme("nord")
+			require("treesitter-context")
+
+			-- Set custom background color for context block
+			vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2d2d2d" })
+			vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "#2d2d2d" })
 		end,
 	},
 }
 
-local current_theme = "everforest"
+local current_theme = "nord"
 
 return {
 	-- colorschemes
@@ -57,7 +62,7 @@ return {
 		config = theme_configs["rose-pine"].config,
 	},
 	{
-		"arcticicestudio/nord-vim",
+		"gbprod/nord.nvim",
 		lazy = fasle,
 		priority = 1000,
 		enabled = (current_theme == "nord"),
@@ -79,8 +84,8 @@ return {
 			local theme_name = theme_configs[current_theme].lualine_theme or "auto"
 			require("lualine").setup({
 				options = {
-					section_separators = "",
-					component_separators = { left = "│", right = "│" },
+					-- section_separators = "",
+					-- component_separators = { left = "│", right = "│" },
 					theme = theme_name,
 				},
 			})

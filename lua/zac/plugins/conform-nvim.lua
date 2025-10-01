@@ -4,8 +4,8 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			javascript = { "prettier" },
-			typescript = { "prettier" },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+			typescript = { "prettierd", "prettier", stop_after_first = true },
 			javascriptreact = { "prettier" },
 			typescriptreact = { "prettier" },
 			json = { "prettier" },
@@ -20,7 +20,7 @@ return {
 		-- Set up format on save
 		format_on_save = {
 			timeout_ms = 5000,
-			lsp_fallback = true,
+			lsp_format = "fallback",
 		},
 	},
 }

@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Using Oil at the moment
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 -- Open parent directory in current window
 -- vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
