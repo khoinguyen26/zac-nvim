@@ -41,14 +41,14 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- search and replace
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- make file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })              -- make file executable
 
 -- vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 vim.keymap.set("n", "<leader><leader>", function()
-	vim.cmd("so")
+    vim.cmd("so")
 end)
 
 vim.keymap.set("n", "E", vim.diagnostic.open_float)
@@ -61,14 +61,3 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
-
-vim.keymap.set("n", "<leader>tt", ":Theme ", { desc = "Switch theme" })
-vim.keymap.set("n", "<leader>te", ":Theme everforest<CR>", { desc = "Switch to everforest" })
-vim.keymap.set("n", "<leader>tn", ":Theme tokyonight<CR>", { desc = "Switch to tokyonight" })
-vim.keymap.set("n", "<leader>tr", ":Theme rose-pine<CR>", { desc = "Switch to rose-pine" })
-
--- Paste below on a new line
-vim.keymap.set("n", "<leader>p", "o<Esc>p", { desc = "Paste below on new line" })
-
--- Paste above on a new line
-vim.keymap.set("n", "<leader>P", "O<Esc>p", { desc = "Paste above on new line" })
