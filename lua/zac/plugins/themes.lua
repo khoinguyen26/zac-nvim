@@ -26,11 +26,6 @@ local theme_configs = {
         lualine_theme = "nord",
         config = function()
             vim.cmd.colorscheme("nord")
-            require("treesitter-context")
-
-            -- Set custom background color for context block
-            vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2d2d2d" })
-            vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "#2d2d2d" })
         end,
     },
     ["dracula"] = {
@@ -95,14 +90,27 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         enabled = (theme_configs[current_theme].statusline == "lualine"),
         config = function()
+            local navic = require("nvim-navic")
             local theme_name = theme_configs[current_theme].lualine_theme or "auto"
-            require("lualine").setup({
+            require("lualine").setup {
                 options = {
                     -- section_separators = "",
                     -- component_separators = { left = "│", right = "│" },
                     theme = theme_name,
                 },
-            })
+                winbar = {
+                    lualine_c = {
+                        {
+                            function()
+                                return navic.get_location()
+                            end,
+                            cond = function()
+                                return navic.is_available()
+                            end
+                        },
+                    }
+                },
+            }
         end,
     },
 }

@@ -33,23 +33,34 @@ return {
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
-                        require("lspconfig")[server_name].setup({})
+                        require("lspconfig")[server_name].setup {}
                     end,
+
+                    ["vtsls"] = function()
+                        require("lspconfig").vtsls.setup({})
+
+                        -- Tell nvim-lspconfig to explicitly disable ts_ls for all TypeScript filetypes
+                        require("lspconfig").ts_ls.disable_by_filetype = {
+                            "javascript",
+                            "javascriptreact",
+                            "javascript.jsx",
+                            "typescript",
+                            "typescriptreact",
+                            "typescript.tsx",
+                        }
+                    end,
+
                 },
 
-                ["vtsls"] = function()
-                    require("lspconfig").vtsls.setup({})
+            })
 
-                    -- Tell nvim-lspconfig to explicitly disable ts_ls for all TypeScript filetypes
-                    require("lspconfig").ts_ls.disable_by_filetype = {
-                        "javascript",
-                        "javascriptreact",
-                        "javascript.jsx",
-                        "typescript",
-                        "typescriptreact",
-                        "typescript.tsx",
-                    }
-                end,
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client and client.server_capabilities.documentSymbolProvider then
+                        require("nvim-navic").attach(client, args.buf)
+                    end
+                end
             })
         end,
     },
