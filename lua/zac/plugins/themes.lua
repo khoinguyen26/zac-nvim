@@ -48,7 +48,7 @@ local theme_configs = {
 	},
 }
 
-local current_theme = "dracula"
+local current_theme = "nord"
 
 return {
 	-- colorschemes
