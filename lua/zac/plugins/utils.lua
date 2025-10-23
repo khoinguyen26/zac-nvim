@@ -3,6 +3,9 @@ return {
         "RRethy/vim-illuminate",
         config = function()
             -- No config needed for basic functionality
+            require("illuminate").configure({
+                large_file_cutoff = 20000
+            })
         end
     },
     -- auto pairs brackets
