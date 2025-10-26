@@ -14,13 +14,6 @@ local theme_configs = {
 			vim.cmd.colorscheme("everforest")
 		end,
 	},
-	["rose-pine"] = {
-		statusline = "lualine",
-		lualine_theme = "rose-pine",
-		config = function()
-			vim.cmd([[colorscheme rose-pine]])
-		end,
-	},
 	["nord"] = {
 		statusline = "lualine",
 		lualine_theme = "nord",
@@ -48,7 +41,7 @@ local theme_configs = {
 	},
 }
 
-local current_theme = "nord"
+local current_theme = "everforest"
 
 return {
 	-- colorschemes
@@ -65,14 +58,6 @@ return {
 		priority = 1000,
 		enabled = (current_theme == "everforest"),
 		config = theme_configs["everforest"].config,
-	},
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		lazy = false,
-		priority = 1000,
-		enabled = (current_theme == "rose-pine"),
-		config = theme_configs["rose-pine"].config,
 	},
 	{
 		"gbprod/nord.nvim",
