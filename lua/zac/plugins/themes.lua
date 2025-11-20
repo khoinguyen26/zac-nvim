@@ -12,6 +12,7 @@ local theme_configs = {
 			vim.g.everforest_enable_italic = true
 			vim.cmd("let g:everforest_background = 'hard'")
 			vim.cmd.colorscheme("everforest")
+			vim.api.nvim_set_hl(0, "IblScope", { fg = "#dbbc7f", nocombine = true })
 		end,
 	},
 	["nord"] = {
