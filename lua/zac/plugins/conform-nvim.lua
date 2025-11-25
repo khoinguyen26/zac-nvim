@@ -19,7 +19,7 @@ return {
 		},
 		-- Set up format on save
 		format_on_save = {
-			timeout_ms = 5000,
+			timeout_ms = 2500,
 			lsp_format = "fallback",
 		},
 	},

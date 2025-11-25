@@ -9,7 +9,7 @@ return {
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 		}
-		vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 			callback = function()
 				require("lint").try_lint()
 			end,
