@@ -6,24 +6,36 @@ return {
             "mason-org/mason-lspconfig.nvim",
         },
         config = function()
-            local map = vim.keymap.set
-            local opts = { noremap = true, silent = true, desc = "[g]o to [d]efinition" }
+            vim.api.nvim_create_autocmd("LspAttach", {
+              callback = function(args)
+                -- Get buffer number and client
+                local bufnr = args.buf
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-            map("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "[g]o to [d]efinition" })
-            map("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true, desc = "[g]o to [D]eclaration" })
-            map("n", "gi", vim.lsp.buf.implementation,
-                { noremap = true, silent = true, desc = "[g]o to [i]mplementation" })
-            map("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "[g]o to [r]eferences" })
-            map("n", "gy", vim.lsp.buf.type_definition,
-                { noremap = true, silent = true, desc = "[g]o to t[y]pe definition" })
-            map("n", "gs", vim.lsp.buf.signature_help, { noremap = true, silent = true, desc = "[g]o [s]ignature help" })
-            map("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true, desc = "Show info" })
-            map("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "rename" })
-            map("n", "<leader>ca", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "[c]ode [a]ction" })
-            map("i", "<C-l>", function()
-                require("blink.cmp").show()
-            end, { desc = "Trigger Blink completion menu" })
+                -- Define map helper
+                local map = function(mode, lhs, rhs, desc)
+                  vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+                end
 
+                -- LSP keymaps
+                map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+                map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
+                map("n", "gi", vim.lsp.buf.implementation, "[g]o to [i]mplementation")
+                map("n", "gr", vim.lsp.buf.references, "[g]o to [r]eferences")
+                map("n", "gy", vim.lsp.buf.type_definition, "Go to type [y]pe")
+                map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+                map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+                map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+                map("n", "E", vim.diagnostic.open_float, "Show diagnostic")
+
+                -- for blink
+                map("i", "<C-l>", function()
+                  local ok, blink = pcall(require, "blink.cmp")
+                  if ok then blink.show() end
+                end, "Trigger Blink completion menu")
+              end,
+            })
+            
             require("mason").setup({
                 registries = {
                     "github:mason-org/mason-registry",
@@ -33,11 +45,15 @@ return {
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name)
-                        require("lspconfig")[server_name].setup {}
+                        require("lspconfig")[server_name].setup {
+                            on_attach = on_attach
+                        }
                     end,
 
                     ["vtsls"] = function()
-                        require("lspconfig").vtsls.setup({})
+                        require("lspconfig").vtsls.setup {
+                            on_attach = on_attach
+                        }
 
                         -- Tell nvim-lspconfig to explicitly disable ts_ls for all TypeScript filetypes
                         require("lspconfig").ts_ls.disable_by_filetype = {

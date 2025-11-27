@@ -1,6 +1,7 @@
 return {
     {
         "RRethy/vim-illuminate",
+        event = "VeryLazy",
         config = function()
             -- No config needed for basic functionality
             require("illuminate").configure({
@@ -17,6 +18,7 @@ return {
     },
     {
         'numToStr/Comment.nvim',
+        event = "VeryLazy",
         opts = {
             -- add any options here
         }
@@ -37,6 +39,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "BufReadPost",
 		main = "ibl",
 		---@module "ibl"
 		---@type ibl.config
