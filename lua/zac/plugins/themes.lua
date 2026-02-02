@@ -1,6 +1,6 @@
 local theme_configs = {
 	["tokyonight"] = {
-		statusline = "windline",
+		statusline = "lualine",
 		config = function()
 			vim.cmd([[colorscheme tokyonight-night]])
 		end,
@@ -42,46 +42,25 @@ local theme_configs = {
 	},
 }
 
-local current_theme = "everforest"
+local current_theme = "tokyonight"
+
+local function theme_spec(repo, name)
+	return {
+		repo,
+		lazy = (current_theme ~= name),
+		priority = 1000,
+		enabled = (current_theme == name),
+		config = theme_configs[name].config,
+	}
+end
 
 return {
 	-- colorschemes
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		enabled = (current_theme == "tokyonight"),
-		config = theme_configs["tokyonight"].config,
-	},
-	{
-		"sainnhe/everforest",
-		lazy = false,
-		priority = 1000,
-		enabled = (current_theme == "everforest"),
-		config = theme_configs["everforest"].config,
-	},
-	{
-		"gbprod/nord.nvim",
-		lazy = fasle,
-		priority = 1000,
-		enabled = (current_theme == "nord"),
-		config = theme_configs["nord"].config,
-	},
-	{
-		"Mofiqul/dracula.nvim",
-		lazy = false,
-		priority = 1000,
-		enabled = (current_theme == "dracula"),
-		config = theme_configs["dracula"].config,
-	},
+	theme_spec("folke/tokyonight.nvim", "tokyonight"),
+	theme_spec("sainnhe/everforest", "everforest"),
+	theme_spec("gbprod/nord.nvim", "nord"),
+	theme_spec("Mofiqul/dracula.nvim", "dracula"),
 	-- statusline
-	{
-		"windwp/windline.nvim",
-		enabled = (theme_configs[current_theme].statusline == "windline"),
-		config = function()
-			require("wlsample.airline")
-		end,
-	},
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
