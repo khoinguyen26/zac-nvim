@@ -1,26 +1,25 @@
 return {
-	"stevearc/conform.nvim",
-	dependencies = { "mason.nvim" },
-	opts = {
-		formatters_by_ft = {
-			lua = { "stylua" },
-			javascript = { "prettierd", "prettier", stop_after_first = true },
-			typescript = { "prettierd", "prettier", stop_after_first = true },
-			javascriptreact = { "prettier" },
-			typescriptreact = { "prettier" },
-			json = { "prettier" },
-			markdown = { "prettier" },
-		},
-		formatters = {
-			prettier = {
-				command = "npx",
-				args = { "prettier", "--stdin-filepath", "$FILENAME" },
-			},
-		},
-		-- Set up format on save
-		format_on_save = {
-			timeout_ms = 2500,
-			lsp_format = "fallback",
-		},
-	},
+    "stevearc/conform.nvim",
+    dependencies = { "mason.nvim" },
+    opts = {
+        formatters_by_ft = {
+            lua = { "stylua" },
+            javascript = { "prettier" },
+            typescript = { "prettier" },
+            javascriptreact = { "prettier" },
+            typescriptreact = { "prettier" },
+            json = { "prettier" },
+            markdown = { "prettier" },
+        },
+        formatters = {
+            prettier = {
+                command = "npx",
+                args = { "prettier", "--stdin-filepath", "$FILENAME" },
+            },
+        },
+        -- Set up format on save
+        format_after_save = {
+            lsp_fallback = true
+        },
+    },
 }
